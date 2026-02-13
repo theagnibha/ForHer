@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For Ishani</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -10,23 +10,34 @@
 
     <div class="hearts-container" id="hearts-bg"></div>
 
-    <div class="card">
+    <div class="container" id="question-section">
         <h1>Ishani</h1>
+        <p class="subtitle">A Query of Great Consequence</p>
+        
+        <div class="question-box">
+            <p class="big-question">Will you be my Valentine?</p>
+            <p class="small-text">Even though we are miles apart, I must ask...</p>
+        </div>
+
+        <div class="buttons">
+            <button class="btn yes-btn" id="yesBtn">YES! ❤️</button>
+            <button class="btn no-btn" id="noBtn">No 🙄</button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="success-section">
+        <h1>She Said Yes!</h1>
         <p class="subtitle">My Serendipitous Joy</p>
 
         <div class="photo-frame">
-            <img src="1.jpg" class="active" alt="Memory 1">
-            <img src="2.jpg" alt="Memory 2">
-            <img src="3.jpg" alt="Memory 3">
-            <img src="4.jpg" alt="Memory 4">
-            <img src="5.jpg" alt="Memory 5">
+            <img src="5.jpg" class="active" alt="Us">
         </div>
 
         <div class="message-box">
-            "In the grand tapestry of the cosmos, I have fortuitously stumbled upon the one thread that renders the entire weave magnificent. You are the serendipitous juxtaposition of kindred spirits, and my heart's apotheosis."
+            "I am profoundly obliged by your affirmative acquiescence. Your choice renders my existence a jubilant symphony of gratitude, and I remain eternally indebted to this serendipitous union."
         </div>
-
-        <button class="btn" id="celebrateBtn">Forever Yours</button>
+        
+        <button class="btn" onclick="celebrateMore()">I Love You</button>
     </div>
 
     <script src="script.js"></script>
