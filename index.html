@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Ishani</title>
     <style>
+        /* Import elegant fonts */
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(135deg, #1a0b0b, #2c0505);
+            background: linear-gradient(135deg, #1a0b0b, #2c0505); /* Dark romantic background */
             height: 100vh;
             overflow: hidden;
             font-family: 'Poppins', sans-serif;
@@ -24,7 +21,7 @@
             color: #fff;
         }
 
-        /* Floating Hearts Background */
+        /* Container for floating hearts */
         .hearts-container {
             position: absolute;
             width: 100%;
@@ -44,7 +41,7 @@
             margin: 0 10px;
             transform: rotate(-45deg);
             animation: float 6s ease-in infinite;
-            border-radius: 5px; /* Softer square */
+            border-radius: 5px;
         }
         
         .heart::before, .heart::after {
@@ -65,21 +62,20 @@
             100% { transform: translateY(-120vh) rotate(-45deg) scale(1); opacity: 0; }
         }
 
-        /* Main Card */
+        /* The Main Card */
         .card {
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 40px;
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             z-index: 10;
             max-width: 90%;
             width: 450px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             animation: fadeIn 1.5s ease-out;
-            position: relative;
         }
 
         h1 {
@@ -99,23 +95,23 @@
             text-transform: uppercase;
         }
 
-        /* Photo Slideshow Container */
+        /* Photo Slideshow Area */
         .photo-frame {
             width: 100%;
-            height: 350px; /* Adjust height based on your photo aspect ratio */
-            background-color: rgba(0,0,0,0.3);
+            height: 400px; /* Increased height for better visibility */
+            background-color: rgba(0,0,0,0.2);
             border-radius: 15px;
             margin-bottom: 25px;
             overflow: hidden;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .photo-frame img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Ensures photos fill the box without stretching */
             position: absolute;
             top: 0;
             left: 0;
@@ -123,15 +119,15 @@
             transition: opacity 1s ease-in-out;
         }
 
+        /* Class to make image visible */
         .photo-frame img.active {
             opacity: 1;
         }
 
-        /* The "Tharoor-esque" Message */
         .message-box {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 1rem;
+            font-size: 1.1rem;
             line-height: 1.6;
             color: #fff0f0;
             padding: 10px;
@@ -173,11 +169,11 @@
         <p class="subtitle">My Serendipitous Joy</p>
 
         <div class="photo-frame">
-            <img src="pic/1.jpg" class="active" alt="Us">
-            <img src="pic/2.jpg" alt="Us">
-            <img src="pic/3.jpg" alt="Us">
-            <img src="pic/4.jpg" alt="Us">
-            <img src="pic/5.jpg" alt="Us">
+            <img src="1.jpg" class="active" alt="Memory 1">
+            <img src="2.jpg" alt="Memory 2">
+            <img src="3.jpg" alt="Memory 3">
+            <img src="4.jpg" alt="Memory 4">
+            <img src="5.jpg" alt="Memory 5">
         </div>
 
         <div class="message-box">
@@ -192,19 +188,22 @@
         const images = document.querySelectorAll('.photo-frame img');
         let currentImgIndex = 0;
 
+        // Function to switch images
         function cycleImages() {
-            // Remove active class from current image
-            images[currentImgIndex].classList.remove('active');
-            
-            // Move to next image, loop back to 0 if at end
-            currentImgIndex = (currentImgIndex + 1) % images.length;
-            
-            // Add active class to new image
-            images[currentImgIndex].classList.add('active');
+            if (images.length > 0) {
+                // Hide current image
+                images[currentImgIndex].classList.remove('active');
+                
+                // Calculate next image index
+                currentImgIndex = (currentImgIndex + 1) % images.length;
+                
+                // Show next image
+                images[currentImgIndex].classList.add('active');
+            }
         }
 
-        // Change image every 3.5 seconds
-        setInterval(cycleImages, 3500);
+        // Run cycleImages every 3000 milliseconds (3 seconds)
+        setInterval(cycleImages, 3000);
 
 
         // --- 2. Floating Hearts Logic ---
@@ -212,18 +211,19 @@
             const heart = document.createElement('div');
             heart.classList.add('heart');
             
-            // Random horizontal position
+            // Random horizontal position (0 to 100vw)
             heart.style.left = Math.random() * 100 + "vw";
-            // Random animation duration
+            
+            // Random animation speed (3s to 5s)
             heart.style.animationDuration = Math.random() * 2 + 3 + "s";
             
-            // Randomize heart colors (Red/Pink/Coral)
+            // Random colors
             const colors = ['#ff6b6b', '#ff4757', '#ff7f50', '#e84393'];
             heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
             
             document.getElementById('hearts-bg').appendChild(heart);
             
-            // Remove heart after animation finishes to prevent memory leaks
+            // Cleanup: remove heart after 5s
             setTimeout(() => {
                 heart.remove();
             }, 5000);
@@ -232,9 +232,10 @@
         // Create a new heart every 300ms
         setInterval(createHeart, 300);
 
-        // --- 3. Button Click Effect ---
+
+        // --- 3. Button Interaction ---
         function celebrate() {
-            // Burst of hearts on click
+            // Create a burst of 30 hearts when button is clicked
             for(let i=0; i<30; i++) {
                 setTimeout(createHeart, i * 50);
             }
