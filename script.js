@@ -1,56 +1,64 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- ELEMENTS ---
-    const questionSection = document.getElementById('question-section');
-    const successSection = document.getElementById('success-section');
-    const noBtn = document.getElementById('noBtn');
-    const yesBtn = document.getElementById('yesBtn');
+    // --- 1. SLIDESHOW LOGIC (Section 1) ---
+    const slideImages = document.querySelectorAll('.photo-frame img');
+    let currentSlide = 0;
 
-    // --- LOGIC: The "Running" No Button ---
-    function moveNoButton() {
-        // Calculate random position within the window
-        // Restricting to 80% of viewport to keep it accessible but elusive
-        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
-        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
-        
-        noBtn.style.position = 'fixed'; // Break it out of the layout
-        noBtn.style.left = `${x}px`;
-        noBtn.style.top = `${y}px`;
+    function nextSlide() {
+        slideImages[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slideImages.length;
+        slideImages[currentSlide].classList.add('active');
     }
+    // Change photo every 2.5 seconds
+    setInterval(nextSlide, 2500);
 
-    // Trigger move on Hover (Desktop) AND Touch (Mobile)
-    noBtn.addEventListener('mouseover', moveNoButton);
-    noBtn.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // Prevents clicking
-        moveNoButton();
-    });
-    noBtn.addEventListener('click', (e) => {
-        e.preventDefault(); // Just in case they manage to click
-        moveNoButton();
+
+    // --- 2. SCREEN NAVIGATION ---
+    const sectionIntro = document.getElementById('section-intro');
+    const sectionProposal = document.getElementById('section-proposal');
+    const sectionSuccess = document.getElementById('section-success');
+
+    const exploreBtn = document.getElementById('exploreBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+
+    // Step 1: Click "Explore Me" -> Show Proposal
+    exploreBtn.addEventListener('click', () => {
+        sectionIntro.style.display = 'none';
+        sectionProposal.classList.remove('hidden');
     });
 
-    // --- LOGIC: The "Yes" Button ---
-    yesBtn.addEventListener('click', () => {
-        // 1. Hide Question Section
-        questionSection.style.display = 'none';
+    // Step 2: Click "No" -> Vanish No, Big Yes
+    noBtn.addEventListener('click', () => {
+        // Hide the No button
+        noBtn.style.display = 'none';
         
-        // 2. Show Success Section
-        successSection.classList.remove('hidden');
-        successSection.style.display = 'block';
-
-        // 3. Burst of Hearts
-        for(let i=0; i<50; i++) {
-            setTimeout(createHeart, i * 30);
-        }
+        // Make Yes button grow and pulse
+        yesBtn.style.transform = 'scale(1.3)';
+        yesBtn.style.background = 'linear-gradient(90deg, #ff4757, #ff6b6b)';
+        yesBtn.innerText = "YES! (Obviously) ❤️";
     });
 
-    // --- BACKGROUND: Floating Hearts ---
+    // Step 3: Click "Yes" -> Show Success
+    yesBtn.addEventListener('click', () => {
+        sectionProposal.style.display = 'none';
+        sectionSuccess.classList.remove('hidden');
+        
+        // Trigger heart explosion
+        celebrate();
+    });
+
+
+    // --- 3. FLOATING HEARTS LOGIC ---
     function createHeart() {
         const heart = document.createElement('div');
         heart.classList.add('heart');
+        
+        // Random Position & Speed
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.animationDuration = Math.random() * 2 + 3 + "s";
         
+        // Random Colors
         const colors = ['#ff6b6b', '#ff4757', '#ff7f50', '#e84393'];
         heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         
@@ -59,38 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         setTimeout(() => heart.remove(), 5000);
     }
-    setInterval(createHeart, 300);
-});
 
-// Extra celebration function for the final button
-function celebrateMore() {
-    alert("I love you more than words can say! ❤️");
-}
-        
-        const container = document.getElementById('hearts-bg');
-        if (container) {
-            container.appendChild(heart);
-            
-            // Remove heart after animation
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
+    // Continuous background hearts
+    setInterval(createHeart, 400);
+
+    // Explosion of hearts
+    function celebrate() {
+        for(let i=0; i<50; i++) {
+            setTimeout(createHeart, i * 40);
         }
     }
-
-    // Create a new heart every 300ms
-    setInterval(createHeart, 300);
-
-    // --- 3. Button Interaction ---
-    const btn = document.getElementById('celebrateBtn');
-    if (btn) {
-        btn.addEventListener('click', () => {
-            // Burst of hearts
-            for(let i=0; i<30; i++) {
-                setTimeout(createHeart, i * 50);
-            }
-            alert("I love you, Ishani! ❤️");
-        });
-    }
 });
-
