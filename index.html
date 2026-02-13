@@ -10,34 +10,52 @@
 
     <div class="hearts-container" id="hearts-bg"></div>
 
-    <div class="container" id="question-section">
-        <h1>Ishani</h1>
-        <p class="subtitle">A Query of Great Consequence</p>
+    <div class="main-card">
         
-        <div class="question-box">
-            <p class="big-question">Will you be my Valentine?</p>
-            <p class="small-text">Even though we are miles apart, I must ask...</p>
+        <div id="section-intro">
+            <h1>Ishani</h1>
+            <p class="subtitle">My Serendipitous Joy</p>
+            
+            <div class="photo-frame">
+                <img src="1.jpg" class="active" alt="Memory">
+                <img src="2.jpg" alt="Memory">
+                <img src="3.jpg" alt="Memory">
+                <img src="4.jpg" alt="Memory">
+            </div>
+
+            <div class="quote-box">
+                "In the grand tapestry of the cosmos, I have fortuitously stumbled upon the one thread that renders the entire weave magnificent."
+            </div>
+
+            <button class="btn primary-btn" id="exploreBtn">Explore Me ✨</button>
         </div>
 
-        <div class="buttons">
-            <button class="btn yes-btn" id="yesBtn">YES! ❤️</button>
-            <button class="btn no-btn" id="noBtn">No 🙄</button>
-        </div>
-    </div>
-
-    <div class="container hidden" id="success-section">
-        <h1>She Said Yes!</h1>
-        <p class="subtitle">My Serendipitous Joy</p>
-
-        <div class="photo-frame">
-            <img src="5.jpg" class="active" alt="Us">
+        <div id="section-proposal" class="hidden">
+            <h2 class="valentine-title">Will you be my Valentine, Ishani? 🌹</h2>
+            <p class="small-text">There is no wrong answer (technically)...</p>
+            
+            <div class="buttons-container">
+                <button class="btn yes-btn" id="yesBtn">YES! ❤️</button>
+                <button class="btn no-btn" id="noBtn">No 🙄</button>
+            </div>
         </div>
 
-        <div class="message-box">
-            "I am profoundly obliged by your affirmative acquiescence. Your choice renders my existence a jubilant symphony of gratitude, and I remain eternally indebted to this serendipitous union."
+        <div id="section-success" class="hidden">
+            <h1 class="success-title">She Said Yes!</h1>
+            
+            <div class="photo-frame-final">
+                <img src="5.jpg" alt="Us Forever">
+            </div>
+
+            <div class="quote-box final-quote">
+                "Your affirmative acquiescence has rendered my existence a jubilant symphony of serendipity. I am eternally indebted to the cosmos for this harmonious union."
+            </div>
+            
+            <div class="love-note">
+                I Love You, Ishani Sadhu ❤️
+            </div>
         </div>
-        
-        <button class="btn" onclick="celebrateMore()">I Love You</button>
+
     </div>
 
     <script src="script.js"></script>
