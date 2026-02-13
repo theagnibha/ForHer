@@ -202,3 +202,57 @@ h1 {
     color: #bbb;
     margin-bottom: 10px;
 }
+/* Buttons */
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    outline: none;
+}
+
+.primary-btn {
+    background: linear-gradient(90deg, #ff4757, #ff6b6b);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+    width: 100%;
+}
+
+.primary-btn:active { transform: scale(0.95); }
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    height: 120px; /* Reserve space so layout doesn't jump */
+    justify-content: center;
+}
+
+.yes-btn {
+    background: #ff4757;
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+}
+
+.no-btn {
+    background: rgba(255,255,255,0.1);
+    color: #ddd;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
+
+.small-text {
+    font-size: 0.85rem;
+    color: #bbb;
+    margin-bottom: 10px;
+}
