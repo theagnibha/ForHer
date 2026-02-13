@@ -1,39 +1,71 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. Slideshow Logic ---
-    const images = document.querySelectorAll('.photo-frame img');
-    let currentImgIndex = 0;
+    // --- ELEMENTS ---
+    const questionSection = document.getElementById('question-section');
+    const successSection = document.getElementById('success-section');
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
 
-    function cycleImages() {
-        if (images.length > 0) {
-            // Remove active class from current image
-            images[currentImgIndex].classList.remove('active');
-            
-            // Calculate next image index
-            currentImgIndex = (currentImgIndex + 1) % images.length;
-            
-            // Add active class to next image
-            images[currentImgIndex].classList.add('active');
-        }
+    // --- LOGIC: The "Running" No Button ---
+    function moveNoButton() {
+        // Calculate random position within the window
+        // Restricting to 80% of viewport to keep it accessible but elusive
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
+        
+        noBtn.style.position = 'fixed'; // Break it out of the layout
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
     }
 
-    // Change image every 3 seconds
-    setInterval(cycleImages, 3000);
+    // Trigger move on Hover (Desktop) AND Touch (Mobile)
+    noBtn.addEventListener('mouseover', moveNoButton);
+    noBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Prevents clicking
+        moveNoButton();
+    });
+    noBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Just in case they manage to click
+        moveNoButton();
+    });
 
-    // --- 2. Floating Hearts Logic ---
+    // --- LOGIC: The "Yes" Button ---
+    yesBtn.addEventListener('click', () => {
+        // 1. Hide Question Section
+        questionSection.style.display = 'none';
+        
+        // 2. Show Success Section
+        successSection.classList.remove('hidden');
+        successSection.style.display = 'block';
+
+        // 3. Burst of Hearts
+        for(let i=0; i<50; i++) {
+            setTimeout(createHeart, i * 30);
+        }
+    });
+
+    // --- BACKGROUND: Floating Hearts ---
     function createHeart() {
         const heart = document.createElement('div');
         heart.classList.add('heart');
-        
-        // Random horizontal position
         heart.style.left = Math.random() * 100 + "vw";
-        
-        // Random animation speed
         heart.style.animationDuration = Math.random() * 2 + 3 + "s";
         
-        // Random colors
         const colors = ['#ff6b6b', '#ff4757', '#ff7f50', '#e84393'];
         heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        const container = document.getElementById('hearts-bg');
+        if (container) container.appendChild(heart);
+        
+        setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+});
+
+// Extra celebration function for the final button
+function celebrateMore() {
+    alert("I love you more than words can say! ❤️");
+}
         
         const container = document.getElementById('hearts-bg');
         if (container) {
