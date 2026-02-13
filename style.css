@@ -1,14 +1,9 @@
-/* Import elegant fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background: linear-gradient(135deg, #1a0b0b, #2c0505); /* Dark romantic background */
+    background: linear-gradient(135deg, #1a0b0b, #2c0505);
     height: 100vh;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
@@ -16,9 +11,10 @@ body {
     justify-content: center;
     align-items: center;
     color: #fff;
+    position: relative;
 }
 
-/* Container for floating hearts */
+/* Background Animation */
 .hearts-container {
     position: absolute;
     width: 100%;
@@ -32,24 +28,16 @@ body {
     position: absolute;
     bottom: -10vh;
     background-color: rgba(220, 20, 60, 0.6);
-    display: inline-block;
-    height: 20px;
     width: 20px;
-    margin: 0 10px;
+    height: 20px;
     transform: rotate(-45deg);
     animation: float 6s ease-in infinite;
     border-radius: 5px;
 }
-
 .heart::before, .heart::after {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: inherit;
-    border-radius: 50%;
+    content: ""; position: absolute; width: 20px; height: 20px;
+    background-color: inherit; border-radius: 50%;
 }
-
 .heart::before { top: -50%; left: 0; }
 .heart::after { top: 0; left: 50%; }
 
@@ -59,49 +47,101 @@ body {
     100% { transform: translateY(-120vh) rotate(-45deg) scale(1); opacity: 0; }
 }
 
-/* The Main Card */
-.card {
+/* Main Container Styling */
+.container {
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 40px;
-    border-radius: 30px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 30px; /* Reduced padding for mobile */
+    border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
     z-index: 10;
-    max-width: 90%;
-    width: 450px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    animation: fadeIn 1.5s ease-out;
+    width: 90%; /* Mobile friendly width */
+    max-width: 450px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    transition: opacity 0.5s ease;
+    position: absolute; /* Keeps them stacked */
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
 }
 
 h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
+    font-size: 2.5rem; /* Slightly smaller for mobile safety */
     color: #ffcccc;
     margin-bottom: 5px;
-    text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.6);
 }
 
 .subtitle {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #d1d1d1;
-    margin-bottom: 25px;
-    font-weight: 300;
-    letter-spacing: 2px;
+    margin-bottom: 20px;
     text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-/* Photo Slideshow Area */
+/* Question Section Specifics */
+.big-question {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.small-text {
+    font-size: 0.9rem;
+    color: #eee;
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    position: relative; /* Needed for No button movement */
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+
+.yes-btn {
+    background: linear-gradient(90deg, #ff4757, #ff6b6b);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+}
+
+.no-btn {
+    background: #555;
+    color: white;
+    position: relative; /* Allows movement */
+}
+
+/* Success Card Image */
 .photo-frame {
     width: 100%;
-    height: 400px;
+    height: 300px; /* Adjusted for mobile fit */
     background-color: rgba(0,0,0,0.2);
     border-radius: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     border: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -109,50 +149,24 @@ h1 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-/* Class to make image visible */
-.photo-frame img.active {
-    opacity: 1;
 }
 
 .message-box {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.5;
     color: #fff0f0;
     padding: 10px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
     margin-bottom: 20px;
 }
 
-.btn {
-    padding: 12px 35px;
-    background: linear-gradient(90deg, #ff4757, #ff6b6b);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 600;
-    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+/* Responsive Tweaks for Small Phones */
+@media (max-width: 380px) {
+    h1 { font-size: 2rem; }
+    .big-question { font-size: 1.5rem; }
+    .photo-frame { height: 250px; }
+    .btn { padding: 10px 20px; font-size: 0.8rem; }
 }
-
-.btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(255, 71, 87, 0.6);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
